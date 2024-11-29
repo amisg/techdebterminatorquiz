@@ -443,3 +443,10 @@ progress::-webkit-progress-value {
 	border: none;
 	background-color: white;
 }
+
+@media (hover: hover) and (pointer: fine) {
+	.option-button:hover {
+		background-color: #f1f5f9;
+		border-color: #cbd5e1;
+	}
+}
