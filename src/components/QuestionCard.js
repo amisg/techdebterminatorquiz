@@ -7,11 +7,13 @@ function QuestionCard({ question, questionNumber, onAnswer }) {
 	// Reset selected option whenever the question changes
 	useEffect(() => {
 		setSelectedOptionIndex(null);
-	}, [question]);
+		console.log(selectedOptionIndex, "selected");
+		// Reset selection when question changes
+	}, [question, selectedOptionIndex]);
 
 	const handleOptionClick = (index, score, text) => {
-		setSelectedOptionIndex(index); // Set the current option as selected
-		onAnswer(score, text); // Trigger the callback
+		setSelectedOptionIndex(index); // Mark the current option as selected
+		onAnswer(score, text); // Trigger the callback with selected data
 	};
 
 	return (

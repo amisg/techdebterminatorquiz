@@ -160,13 +160,20 @@ progress::-webkit-progress-value {
 	transition: all 0.2s ease-in-out;
 }
 
-.option-button:hover {
+/* .option-button:hover {
 	background-color: #f1f5f9;
 	border-color: #cbd5e1;
+} */
+
+@media (hover: hover) and (pointer: fine) {
+	.option-button:hover {
+		background-color: #f1f5f9;
+		border-color: #cbd5e1;
+	}
 }
 
 /* Selected State */
-.option-button.selected {
+.option-button .selected {
 	background-color: #3b82f6;
 	border-color: #1d4ed8;
 	color: #ffffff;
