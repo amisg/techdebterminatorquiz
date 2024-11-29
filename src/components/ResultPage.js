@@ -307,6 +307,9 @@ const ResultPage = () => {
 
 	return (
 		<div className="result-page" id="pdf-content">
+			<div className="home-button">
+				<button onClick={goToHomePage}>Home</button>
+			</div>
 			<h1>Quiz Results</h1>
 			<div className="summary">
 				<p>
@@ -397,9 +400,7 @@ const ResultPage = () => {
 				<button onClick={sendResultsByEmail}>Send My Report</button>
 				{emailStatus && <p className="email-success">{emailStatus}</p>}
 			</div>
-			<div className="home-button">
-				<button onClick={goToHomePage}>Home</button>
-			</div>
+
 			{/* <div className="actions">
 				<button onClick={generatePDF}>Download PDF</button>
 			</div> */}
