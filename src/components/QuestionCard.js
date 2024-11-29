@@ -1,15 +1,6 @@
-import { useState } from "react";
 import "../App.css";
 
 function QuestionCard({ question, questionNumber, onAnswer }) {
-	// State to track selected option
-	const [selectedOptionIndex, setSelectedOptionIndex] = useState(null);
-
-	const handleOptionClick = (index, score, text) => {
-		setSelectedOptionIndex(index); // Update selected option
-		onAnswer(score, text); // Trigger the callback
-	};
-
 	return (
 		<div className="question-card">
 			<h2>
@@ -28,14 +19,12 @@ function QuestionCard({ question, questionNumber, onAnswer }) {
 				{question.options.map((option, index) => (
 					<button
 						key={index}
-						className={`option-button ${
-							selectedOptionIndex === index ? "selected" : ""
-						}`}
-						onClick={() => handleOptionClick(index, option.score, option.text)}>
+						className="option-button"
+						onClick={() => onAnswer(option.score, option.text)}>
 						<div className="option-content">
 							<div>
 								<p>{option.text}</p>
-								<p>Impact: {option.impact}</p>
+								<p>Impact:{option.impact}</p>
 							</div>
 						</div>
 					</button>
