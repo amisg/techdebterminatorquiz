@@ -1,6 +1,19 @@
+import { useState, useEffect } from "react";
 import "../App.css";
 
 function QuestionCard({ question, questionNumber, onAnswer }) {
+	const [selectedOptionIndex, setSelectedOptionIndex] = useState(null);
+
+	// Reset selected option whenever the question changes
+	useEffect(() => {
+		setSelectedOptionIndex(null);
+	}, [question]);
+
+	const handleOptionClick = (index, score, text) => {
+		setSelectedOptionIndex(index); // Set the current option as selected
+		onAnswer(score, text); // Trigger the callback
+	};
+
 	return (
 		<div className="question-card">
 			<h2>
@@ -19,12 +32,14 @@ function QuestionCard({ question, questionNumber, onAnswer }) {
 				{question.options.map((option, index) => (
 					<button
 						key={index}
-						className="option-button"
-						onClick={() => onAnswer(option.score, option.text)}>
+						className={`option-button ${
+							selectedOptionIndex === index ? "selected" : ""
+						}`}
+						onClick={() => handleOptionClick(index, option.score, option.text)}>
 						<div className="option-content">
 							<div>
 								<p>{option.text}</p>
-								<p>Impact:{option.impact}</p>
+								<p>Impact: {option.impact}</p>
 							</div>
 						</div>
 					</button>
