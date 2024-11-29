@@ -226,10 +226,17 @@ progress::-webkit-progress-value {
 
 /* result page */
 .result-page {
-	max-width: 800px;
-	margin: 0 auto;
+	/* max-width: 800px;
+	margin: 0 auto; */
 	padding: 20px;
 	font-family: Arial, sans-serif;
+	max-width: 800px;
+	margin: 20px auto;
+	padding: 30px 20px;
+	background: #ffffff;
+	border-radius: 12px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	/* text-align: center; */
 }
 
 .result-page h1 {
@@ -424,4 +431,16 @@ progress::-webkit-progress-value {
 
 .email-success {
 	color: green;
+}
+
+.home-button button {
+	background-color: #0084ff;
+	border: none;
+	color: white;
+	font-size: 16px;
+	padding: 10px 20px;
+	border-radius: 5px;
+	cursor: pointer;
+	transition: 0.3s;
+	margin: 10px;
 }

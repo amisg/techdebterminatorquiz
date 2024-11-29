@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import {
@@ -10,7 +10,7 @@ import {
 	Tooltip,
 	Legend,
 } from "chart.js";
-import { Bar } from "react-chartjs-2";
+// import { Bar } from "react-chartjs-2";
 import GaugeChart from "./GuageChart";
 import jsPDF from "jspdf";
 import { baseUrl } from "../Util";
@@ -32,6 +32,7 @@ const ResultPage = () => {
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(null);
 	const [emailStatus, setEmailStatus] = useState("");
+	const navigate = useNavigate();
 	// console.log("rec", recommendation);
 
 	// Fetch submission data
@@ -171,10 +172,7 @@ const ResultPage = () => {
 				attachmentBase64: pdfBase64,
 			};
 
-			const response = await axios.post(
-				"http://localhost:8080/api/send-email",
-				emailData
-			);
+			const response = await axios.post(`${baseUrl}/api/send-email`, emailData);
 
 			if (response.data.success) {
 				setEmailStatus("Email sent successfully!");
@@ -282,26 +280,29 @@ const ResultPage = () => {
 	const { totalScore, riskCategory, answers } = submissionData;
 
 	// chart data
-	const chartData = {
-		labels: answers.map((_, index) => `Q${index + 1}`),
-		datasets: [
-			{
-				label: "Question Scores",
-				data: answers.map((ans) => ans.score),
-				backgroundColor: "rgba(54, 162, 235, 0.6)",
-				borderColor: "rgba(54, 162, 235, 1)",
-				borderWidth: 1,
-			},
-		],
-	};
+	// const chartData = {
+	// 	labels: answers.map((_, index) => `Q${index + 1}`),
+	// 	datasets: [
+	// 		{
+	// 			label: "Question Scores",
+	// 			data: answers.map((ans) => ans.score),
+	// 			backgroundColor: "rgba(54, 162, 235, 0.6)",
+	// 			borderColor: "rgba(54, 162, 235, 1)",
+	// 			borderWidth: 1,
+	// 		},
+	// 	],
+	// };
 
-	const chartOptions = {
-		scales: {
-			y: {
-				beginAtZero: true,
-				max: 10,
-			},
-		},
+	// const chartOptions = {
+	// 	scales: {
+	// 		y: {
+	// 			beginAtZero: true,
+	// 			max: 10,
+	// 		},
+	// 	},
+	// };
+	const goToHomePage = () => {
+		navigate("/");
 	};
 
 	return (
@@ -395,6 +396,9 @@ const ResultPage = () => {
 				<p>Receive a comprehensive analysis with actionable recommendations</p>
 				<button onClick={sendResultsByEmail}>Send My Report</button>
 				{emailStatus && <p className="email-success">{emailStatus}</p>}
+			</div>
+			<div className="home-button">
+				<button onClick={goToHomePage}>Home</button>
 			</div>
 			{/* <div className="actions">
 				<button onClick={generatePDF}>Download PDF</button>
